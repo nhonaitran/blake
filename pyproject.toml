@@ -17,7 +17,7 @@ matplotlib = "^3.5.1"
 requests = "^2.26.0"
 SQLAlchemy = "^1.4.29"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 
 [tool.poetry.scripts]
