@@ -60,4 +60,4 @@ docs/_build/
 # PyBuilder
 target/
 
-docker/data/db/
+docker/data/db/pg_stat_tmp/
