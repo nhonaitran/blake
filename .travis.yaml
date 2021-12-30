@@ -1,0 +1,37 @@
+language: python
+dist: xenial
+python:
+  - "3.9"
+
+stages:
+  - Quality
+  - Publish
+
+before_install:
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
+install:
+  - poetry install
+
+jobs:
+  include:
+    - stage: Quality
+      name: tests
+      script: make test
+    - name: integration
+      script: make integration
+    - stage: Publish
+      script: skip
+      before_deploy:
+        - poetry build
+        - poetry config repositories.testpypi https://test.pypi.org/legacy/
+        - poetry config http-basic.testpypi $TEST_PYPI_USERNAME $TEST_PYPI_PASSWORD
+      deploy:
+        provider: script
+        script: poetry publish -r testpypi
+        skip_cleanup: true
+        on:
+          branch: master
+          python: "3.9"
+          tags: true
+      if: tag IS present

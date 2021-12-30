@@ -21,7 +21,7 @@ SQLAlchemy = "^1.4.29"
 pytest = "^6.2.5"
 
 [tool.poetry.scripts]
-etl = 'blake.cli:main'
+etl = "blake.cli:main"
 
 [build-system]
 requires = ["poetry-core"]
